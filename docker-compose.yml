@@ -1,0 +1,35 @@
+version: '3.8'
+
+
+services:
+  db:
+    container_name: db
+    image: postgres:latest
+    
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - data:\var\lib\postgresql\data
+    ports:
+      - "5432:5432"
+    networks:
+      - isolation-network
+    
+      
+
+  script:
+    build: bot
+    depends_on:
+      - db
+    links:
+      - db:db
+    networks:
+      - isolation-network
+
+
+networks:
+  isolation-network:
+    driver: bridge
+volumes:
+  data:
