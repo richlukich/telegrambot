@@ -18,6 +18,8 @@ file_unique_id = None
 
 db = DataBase()
 
+if not db.check_table_users():
+    db.create_table_users()    
 '''
 try:
     db.create_table_users()

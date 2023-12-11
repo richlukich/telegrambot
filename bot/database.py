@@ -85,7 +85,12 @@ class DataBase():
         else:
             return False
     def delete_all_users(self):
-        self.cursor.execute('''DELETE FROM users;''')   
+        self.cursor.execute('''DELETE FROM users;''') 
+
+    def check_table_users(self):
+        self.cursor.execute("SELECT * from information_schema.tables where table_name=%s", ('users',))
+        
+        return bool(self.cursor.rowcount)  
 if __name__ == '__main__':
     db = DataBase()
     
